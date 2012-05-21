@@ -2,6 +2,23 @@
 
 科大讯飞语音识别插件
 
+## Adding the Plugin to your project
+1. To install the plugin, move www/iflytek.js to your project's www folder and include a reference to it in your html file after phonegap.js.
+<pre><code>&lt;script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+&lt;script type="text/javascript" charset="utf-8" src="iflytek.js"></script>
+</code></pre>
+
+2. Copy src folder files to your project src folder.
+
+3. Add permissions to your AndroidManifest.xml file.
+<pre><code>&lt;uses-permission android:name="android.permission.RECORD_AUDIO" />
+&lt;uses-permission android:name="android.permission.INTERNET" />
+&lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+&lt;uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+&lt;uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+&lt;uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+</code></pre>
+
 ## Usage
 
 ### sina.voice.recognizer.init(appId)
