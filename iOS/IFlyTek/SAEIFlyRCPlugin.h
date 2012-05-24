@@ -6,12 +6,21 @@
 //  Copyright (c) 2012年 SINA SAE. All rights reserved.
 //
 
-#import <Cordova/CDVPlugin.h>
+#import <Cordova/CDV.h>
 #import <IFlyISR/IFlyRecognizeControl.h>
+typedef enum _IsrType
+{
+	IsrText = 0,		// 转写
+	IsrKeyword,			// 关键字识别
+	IsrUploadKeyword	// 关键字上传
+}IsrType;
+
 @interface SAEIFlyRCPlugin : CDVPlugin<IFlyRecognizeControlDelegate>
 {
     IFlyRecognizeControl *iFlyRC;
     BOOL isLast;
+    
+    IsrType _type;
 }
 @property (nonatomic, copy) NSString *callBackId;
 @property (nonatomic, copy) NSString *resultCallback;
