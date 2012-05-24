@@ -10,7 +10,9 @@
 
 2. Copy src folder files to your project src folder.
 
-3. Add permissions to your AndroidManifest.xml file.
+3. Copy libs folder files to your project libs folder.
+
+4. Add permissions to your AndroidManifest.xml file.
 <pre><code>&lt;uses-permission android:name="android.permission.RECORD_AUDIO" />
 &lt;uses-permission android:name="android.permission.INTERNET" />
 &lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -19,13 +21,17 @@
 &lt;uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 </code></pre>
 
+5. Add plugin info to your res/xml/plugins.xml file.
+<pre><code>&lt;plugin name="IFlyTekPlugin" value="com.sina.mobile.iflytek.IFlyTekPlugin"/>
+</code></pre>
+
 ## Usage
 
-### sina.voice.recognizer.init(appId)
+### window.plugins.iftRecognizer.init(appId)
 
 初始化插件，appId通过http://dev.voicecloud.cn/index.php?vt=1申请
 
-### sina.voice.recognizer.setOption(params)
+### window.plugins.iftRecognizer.setOption(params)
 
 设置插件参数
 
@@ -37,28 +43,28 @@
   * ”video”：视频音乐搜索
   * ”asr”：命令词识别
 * engineParams  附加参数列表，每项中间以逗号分隔，如在地图搜索时可指定搜索区域：”area=安徽省合肥市”，无附加参数传null
-  * grammar	自定义命令词识别需要传入语法
-  * sampleRate	录音采样率，支持rate8k、rate11k、rate16k、rate22k四种，默认为rate16k
+  * grammar 自定义命令词识别需要传入语法
+  * sampleRate  录音采样率，支持rate8k、rate11k、rate16k、rate22k四种，默认为rate16k
 
 例如:
 <pre><code>
-sina.voice.recognizer.setOption({
+window.plugins.iftRecognizer.setOption({
     engine: 'sms',
     sampleRate: 'rate16k',
 });
  
-sina.voice.recognizer.setOption({
+window.plugins.iftRecognizer.setOption({
     engine: 'poi',
     engineParams: 'area=北京',
 });
  
-sina.voice.recognizer.setOption({
+window.plugins.iftRecognizer.setOption({
     grammar: extendID
 });
 </code></pre>
 注意engine, engineParams, grammar的配合。
 
-### sina.voice.recognizer.setListener(name)
+### window.plugins.iftRecognizer.setListener(name)
 
 设置监听回调函数
 
@@ -70,9 +76,9 @@ sina.voice.recognizer.setOption({
 * response.results 是当前这次识别的列表，为recognizerResult object，识别结果，请参考RecognizerResult定义
 
 * recognizerResult 说明
-  * String text	识别文本结果
-  * int confidence	结果置信度
-  * semanteme	语义结果，由本次识别所选择服务定义
+  * String text 识别文本结果
+  * int confidence  结果置信度
+  * semanteme 语义结果，由本次识别所选择服务定义
 
 例子:
 <pre><code>
@@ -85,7 +91,7 @@ function onResults(response) {
 }
 </code></pre>
 
-### sina.voice.recognizer.start(onEnd)
+### window.plugins.iftRecognizer.start(onEnd)
 
 开始监听,开始语音识别，弹出对话框。
 
@@ -93,12 +99,12 @@ function onResults(response) {
   * response.errorCode 错误码
   * response.message 信息
 
-### sina.voice.recognizer.uploadKeyword(keys, contentId, onDataUploaded, onEnd)
+### window.plugins.iftRecognizer.uploadKeyword(keys, contentId, onDataUploaded, onEnd)
 
 上传关键词列表
 
-* keys	需要上传的关键词列表 例如”计算机,科技,文学”
-* contentID	保存在服务器端的数据名称，已有的名称会进行覆盖操作，如果是第一次上传，则会在服务端按照此名称新建
+* keys  需要上传的关键词列表 例如”计算机,科技,文学”
+* contentID 保存在服务器端的数据名称，已有的名称会进行覆盖操作，如果是第一次上传，则会在服务端按照此名称新建
 
 * onDataUploaded(response)
   * response.contentID 用于UploadDialog.setContent(byte[],String,String)中contentID参数，表示对前面的结果进行覆盖。
@@ -111,28 +117,28 @@ function onResults(response) {
 ## Demos
 <pre><code>
 // 语音听写：
-sina.voice.recognizer.init(appId);
-sina.voice.recognizer.setOption({
+window.plugins.iftRecognizer.init(appId);
+window.plugins.iftRecognizer.setOption({
   engine: 'sms',
   sampleRate: 'rate16k',
 }); 
-sina.voice.recognizer.setListener("onResults");
-sina.voice.recognizer.start(function(response) {
+window.plugins.iftRecognizer.setListener("onResults");
+window.plugins.iftRecognizer.start(function(response) {
   console.log("response: " + response.errorCode + ", msg: " + response.message);
 });
 
 // 关键词识别：
 var keys = "互联网,计算机,科技,生活,人文,天文,月球的多面,第三集";
-sina.voice.recognizer.uploadKeyword(keys, "tags", function(result) {
+window.plugins.iftRecognizer.uploadKeyword(keys, "tags", function(result) {
   extendID = result.extendID;
   console.log("extendID: " + extendID);
 }, function(response) {
   console.log("response: " + response.errorCode + ", msg: " + response.message);
 });
-sina.voice.recognizer.init(appId);
-sina.voice.recognizer.setOption({grammar: extendID});
-sina.voice.recognizer.setListener("onResults");
-sina.voice.recognizer.start(function(response) {
+window.plugins.iftRecognizer.init(appId);
+window.plugins.iftRecognizer.setOption({grammar: extendID});
+window.plugins.iftRecognizer.setListener("onResults");
+window.plugins.iftRecognizer.start(function(response) {
   console.log("response: " + response.errorCode + ", msg: " + response.message);
 });
 
