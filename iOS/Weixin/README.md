@@ -21,7 +21,7 @@
 
 在微信终端程序中注册第三方应用
 说明：需要在每次启动第三方应用程序时调用。第一次调用后，会在微信的可用应用列表中出现。
-  * appId 微信开发者ID (通过http://open.weixin.qq.com/ 申请)
+  * appId 微信开发的ID (通过http://open.weixin.qq.com/ 申请)
   * onSuccess 注册成功时的回调函数
   * onError 注册失败时的回调函数
     * errCode 错误值
@@ -31,7 +31,7 @@ demo
 <pre><code>
 sina.weixin.registerApp(function(){
                             registed=true;
-                            },onError,"wxd930ea5d5a258f4f");
+                            },onError,"XXXXXXXXX");// 填入申请的微信应用开发appId
 function onError(response){
     var detail = document.getElementById("detail");
     detail.innerHTML="error:"+response.errCode;
