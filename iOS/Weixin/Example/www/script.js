@@ -4,7 +4,7 @@
 
 var registed = false;
 
-var appId = 'wx67beb0f52a40e7d4';
+var appId = 'wxd930ea5d5a258f4f'; //please modify to your weichat application ID 
 
 function onSuccess(){
     set2SendView();
