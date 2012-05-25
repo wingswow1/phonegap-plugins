@@ -15,6 +15,8 @@
 
 3.Add Weixin-SinaWeixinPlugin [key-value] to Cordova.plist->Plugins
 
+4.Modify project info.plist : add URL types -> URl Schemes -> Item0-'your appId' (key-value) 
+
 ##Usage
 
 ###sina.weixin.registerApp(onSuccess,onError,appId)
