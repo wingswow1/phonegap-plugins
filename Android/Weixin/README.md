@@ -6,8 +6,7 @@
 
 1.add weixin.js to your www folder and include it to your html file below cordova.js
 
-<pre><code>
-&lt;script type="text/javascript" charset="utf-8" src="cordova.js">
+<pre><code>&lt;script type="text/javascript" charset="utf-8" src="cordova.js">
 &lt;script type="text/javascript" charset="utf-8" src="weixin.js">
 </code></pre>
 
@@ -15,13 +14,12 @@
 
 3.Add libs/libammsdk.jar file to your project libs directory.
 
-3.Add below words to your res/xml/plugins.xml.
+4.Add below words to your res/xml/plugins.xml.
 
-<pre><code>
-&lt;plugin name="Weixin" value="com.sina.mobile.weixin.WeixinPlugin"/>
+<pre><code>&lt;plugin name="Weixin" value="com.sina.mobile.weixin.WeixinPlugin"/>
 </code></pre>
 
-4.Modify APP_ID in src/com/sina/mobile/weixin/Constants.java file and
+5.Modify APP_ID in src/com/sina/mobile/weixin/Constants.java file and
 assets/www/script.js.
 
 ##Usage
@@ -30,7 +28,7 @@ assets/www/script.js.
 
 在微信终端程序中注册第三方应用
 说明：需要在每次启动第三方应用程序时调用。第一次调用后，会在微信的可用应用列表中出现。
-  * appId 微信开发的ID (通过http://open.weixin.qq.com/ 申请)
+  * appId 微信开发的ID (通过http://open.weixin.qq.com/ 申请，注意Android版本还需要匹配签名和包名)
   * onSuccess 注册成功时的回调函数
   * onError 注册失败时的回调函数
     * errCode 错误值
@@ -47,8 +45,6 @@ function onError(response){
     detail.innerHTML=detail.innerHTML+"<br>"+response.errStr;
 }
 </code></pre>
-
-###--sina.weixin.getWXAppInstallUrl(onSuccess,onError)--
 
 ###sina.weixin.isWeixinInstalled(onSuccess,onError)
 
@@ -351,7 +347,7 @@ function getWebpageContent(){
     * thumbData APP扩展信息缩略图base64数据，大小不能超过32K。当thumbUrl和thumbData同时设置时，采用thumbData。
     * extInfo 自定义简单数据，长度不能超过2K。微信应用会回传给第三方应用处理。extInfo与fileData不能同时为空。
     * fileData APP文件数据，JSON对象，大小不能超过10M。该数据发送给微信好友，微信好友需要点击后下载数据，微信应用会回传给第三方应用处理。extInfo与fileData不能同时为空。
-    * --url 若第三方应用不存在，微信应用会打开该url所指的App下载地址。--(Android版本没有此属性)
+    * url 若第三方应用不存在，微信应用会打开该url所指的App下载地址。(Android版本没有此属性)
 
 demo
 <pre><code>
