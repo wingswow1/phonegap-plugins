@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.cordova.DroidGap;
+import org.apache.cordova.api.CordovaInterface;
 import org.apache.cordova.api.Plugin;
 import org.apache.cordova.api.PluginResult;
 import org.json.JSONArray;
@@ -22,7 +23,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.webkit.WebView;
 
+import com.sina.mobile.weixin.CordovaExample.OnPageFinishedListener;
 import com.tencent.mm.sdk.openapi.BaseResp;
 import com.tencent.mm.sdk.openapi.GetMessageFromWX;
 import com.tencent.mm.sdk.openapi.IWXAPI;
@@ -56,10 +59,17 @@ public class WeixinPlugin extends Plugin {
 	}
 
 	@Override
-	public void onMessage(String id, Object data) {
-		super.onMessage(id, data);
+	public void setContext(CordovaInterface ctx) {
+		super.setContext(ctx);
 
-		Log.d(TAG, "id: " + id + ", data: " + data.toString());
+		DroidGap gap = ((DroidGap) (this.ctx));
+		((CordovaExample) gap)
+				.setOnPageFinishedListener(new OnPageFinishedListener() {
+					@Override
+					public void onPageFinished(WebView view, String url) {
+						handleReq();
+					}
+				});
 	}
 
 	@Override
@@ -68,13 +78,25 @@ public class WeixinPlugin extends Plugin {
 
 		Log.d(TAG, "onResume");
 
-		DroidGap gap = ((DroidGap) (this.ctx));
+		handleReq();
+	}
+
+	private void handleReq() {
+		final DroidGap gap = ((DroidGap) (this.ctx));
+		try {
+			Intent i = gap.getIntent();
+			Log.d(TAG, "intent: " + i);
+		} catch (Exception e) {
+			Log.d(TAG, "e: ", e);
+		}
 
 		if (gap.getIntent() != null) {
 			Bundle bundle = gap.getIntent().getExtras();
 			if (bundle == null) {
 				return;
 			}
+
+			Log.d(TAG, "bundle: " + bundle);
 
 			String type = bundle.getString("type");
 			Log.d(TAG, "type: " + type);
@@ -110,7 +132,7 @@ public class WeixinPlugin extends Plugin {
 					e.printStackTrace();
 				}
 
-				((CordovaExample) this.ctx).loadJs(String.format(
+				((CordovaExample) gap).loadJs(String.format(
 						"javascript:%s(%s);", responser, json.toString()));
 			} else {
 				int errCode = bundle.getInt("errCode", BaseResp.ErrCode.ERR_OK);

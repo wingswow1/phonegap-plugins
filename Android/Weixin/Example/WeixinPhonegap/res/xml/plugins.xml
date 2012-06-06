@@ -35,5 +35,5 @@
     <plugin name="Capture" value="org.apache.cordova.Capture"/>
     <plugin name="Battery" value="org.apache.cordova.BatteryListener"/>
     <plugin name="SplashScreen" value="org.apache.cordova.SplashScreen"/>
-    <plugin name="Weixin" value="com.sina.mobile.weixin.WeixinPlugin"/>
+    <plugin name="Weixin" value="com.sina.mobile.weixin.WeixinPlugin" onload="true"/>
 </plugins>
