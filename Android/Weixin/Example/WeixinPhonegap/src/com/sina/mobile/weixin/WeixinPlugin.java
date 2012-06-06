@@ -1,6 +1,7 @@
 package com.sina.mobile.weixin;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -12,10 +13,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -50,6 +53,13 @@ public class WeixinPlugin extends Plugin {
 		DroidGap gap = ((DroidGap) (this.ctx));
 
 		gap.setIntent(intent);
+	}
+
+	@Override
+	public void onMessage(String id, Object data) {
+		super.onMessage(id, data);
+
+		Log.d(TAG, "id: " + id + ", data: " + data.toString());
 	}
 
 	@Override
@@ -180,6 +190,18 @@ public class WeixinPlugin extends Plugin {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+			} else if (thumbUrl.startsWith("content")) {
+				Uri imgUri = Uri.parse(thumbUrl);
+				ContentResolver cr = ctx.getContentResolver();
+				try {
+					Bitmap bmp = BitmapFactory.decodeFileDescriptor(cr
+							.openAssetFileDescriptor(imgUri, "r")
+							.getFileDescriptor());
+					msg.thumbData = Util.inputStreamToByte(cr
+							.openInputStream(imgUri));
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
 			} else {
 				Bitmap bmp = BitmapFactory.decodeFile(thumbUrl);
 				Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE,
@@ -203,6 +225,9 @@ public class WeixinPlugin extends Plugin {
 			resp.message = msg;
 
 			api.sendResp(resp);
+
+			DroidGap gap = ((DroidGap) (this.ctx));
+			gap.moveTaskToBack(true);
 		}
 	}
 
@@ -222,13 +247,21 @@ public class WeixinPlugin extends Plugin {
 			Bitmap bmp = null;
 			if (imageUrl.startsWith("http")) {
 				imgObj.imageUrl = imageUrl;
-
 				try {
 					bmp = BitmapFactory.decodeStream(new URL(imageUrl)
 							.openStream());
 				} catch (MalformedURLException e) {
 				} catch (IOException e) {
 				}
+			} else if (imageUrl.startsWith("content")) {
+				Uri imgUri = Uri.parse(imageUrl);
+				ContentResolver cr = ctx.getContentResolver();
+				imgObj.imageData = Util.inputStreamToByte(cr
+						.openInputStream(imgUri));
+
+				bmp = BitmapFactory.decodeFileDescriptor(cr
+						.openAssetFileDescriptor(imgUri, "r")
+						.getFileDescriptor());
 			} else {
 				String path = imageUrl;
 				File file = new File(path);
@@ -249,6 +282,8 @@ public class WeixinPlugin extends Plugin {
 			handleSend(msg, type, "img");
 
 		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}

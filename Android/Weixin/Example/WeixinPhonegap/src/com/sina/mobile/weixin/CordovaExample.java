@@ -16,7 +16,7 @@ public class CordovaExample extends DroidGap {
 
 		Log.d(TAG, "onCreate");
 	}
-	
+
 	public void loadJs(String js) {
 		this.appView.loadUrl(js);
 	}
