@@ -22,8 +22,6 @@ public class CordovaExample extends DroidGap {
 		super.onCreate(savedInstanceState);
 
 		super.loadUrl("file:///android_asset/www/index.html");
-
-		Log.d(TAG, "onCreate");
 	}
 
 	public void init() {
@@ -31,8 +29,6 @@ public class CordovaExample extends DroidGap {
 			@Override
 			public void onPageFinished(WebView view, String url) {
 				super.onPageFinished(view, url);
-
-				Log.d(TAG, "onPageFinished");
 
 				if (onPageFinishedListener != null) {
 					onPageFinishedListener.onPageFinished(view, url);
