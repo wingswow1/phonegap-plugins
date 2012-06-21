@@ -5,6 +5,18 @@
 var registed = false;
 
 var appId = 'wxd930ea5d5a258f4f'; //please modify to your weichat application ID 
+var sendType='0';
+
+function sendTypeA(){
+    var detail=document.getElementById("sendTypeDescription");
+    detail.innerHTML="发送内容到：会话";
+    sendType='0';
+}
+function sendTypeB(){
+    var detail=document.getElementById("sendTypeDescription");
+    detail.innerHTML="发送内容到：朋友圈";
+    sendType='1';
+}
 
 function onSuccess(){
     set2SendView();
@@ -31,7 +43,9 @@ function sendTextContent() {
         registed=true;
     }
     
-    plugins.weixin.textContent(onSuccess,onError,"send","hello world");
+    plugins.weixin.textContent(onSuccess,onError,"send","hello world",{
+                               scene:sendType
+                               });
 }
 
 function sendImageContent(){
@@ -41,6 +55,7 @@ function sendImageContent(){
         plugins.weixin.imageContent(onSuccess,onError,"send",imageURI,{
                                      title:"kris",
                                      description:"picture",
+                                     scene:sendType
                                      });
     },
     onCameraFail:function(msg){
@@ -66,7 +81,8 @@ function sendMusicContent(){
                                  {
                                  title:"Sunshine",
                                  description:"Happy Music",
-                                 thumbUrl:"http://pluginlist.sinaapp.com/client/images/music.png"
+                                 thumbUrl:"http://pluginlist.sinaapp.com/client/images/music.png",
+                                 scene:sendType
                                  });
 }
 
@@ -76,7 +92,8 @@ function sendVideoContent(){
                                  {
                                  title:"video",
                                  description:"Happy Video",
-                                 thumbUrl:"http://pluginlist.sinaapp.com/client/images/video.png"
+                                 thumbUrl:"http://pluginlist.sinaapp.com/client/images/video.png",
+                                 scene:sendType
                                  });
 }
 
@@ -86,7 +103,8 @@ function sendWebpageContent(){
                                    {
                                    title:"新浪移动云平台介绍",
                                    description:"新浪移动云是在SAE基础上的子平台，专注于为移动设备同时提供云+端的能力。\n为方便开发者使用，移动云直接集成在SAE在线管理平台中。",
-                                   thumbUrl:"http://pluginlist.sinaapp.com/client/images/icon.png"
+                                   thumbUrl:"http://pluginlist.sinaapp.com/client/images/icon.png",
+                                   scene:sendType
                                    });
 }
 
@@ -102,7 +120,8 @@ function sendAPPContent(){
                                                    {title:"App消息名称",
                                                    description:"内容描述",
                                                    thumbUrl:"缩略图链接地址"}
-                                                   )
+                                                   ),
+                           scene:sendType
                            });
 }
 
@@ -136,10 +155,6 @@ function getImageContent(){
     }
     };
     app.getPicture();
-//    weixin.getImageContent(onSuccess,onError,"http://pluginlist.sinaapp.com/client/images/music.png",{
-//                                title:"kris",
-//                                description:"picture",
-//                                });
 }
 
 function getMusicContent(){

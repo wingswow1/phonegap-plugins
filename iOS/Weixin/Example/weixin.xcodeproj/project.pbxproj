@@ -39,8 +39,8 @@
 		AF694D8A15634E61000C4CC9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF694D8915634E61000C4CC9 /* MainViewController.m */; };
 		AF694D8C15634E61000C4CC9 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF694D8B15634E61000C4CC9 /* MainViewController.xib */; };
 		AF694D9015634E61000C4CC9 /* verify.sh in Resources */ = {isa = PBXBuildFile; fileRef = AF694D8F15634E61000C4CC9 /* verify.sh */; };
-		AF694D9A15634E95000C4CC9 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF694D9715634E95000C4CC9 /* libWeChatSDK.a */; };
 		AFB82E1C1564A43B00ACDD1A /* www in Resources */ = {isa = PBXBuildFile; fileRef = AFB82E1B1564A43B00ACDD1A /* www */; };
+		AFBCF47F1592F0F600CA0BA7 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFBCF47C1592F0F600CA0BA7 /* libWeChatSDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,10 +83,10 @@
 		AF694D8B15634E61000C4CC9 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainViewController.xib; path = Classes/MainViewController.xib; sourceTree = "<group>"; };
 		AF694D8E15634E61000C4CC9 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; name = README; path = Plugins/README; sourceTree = "<group>"; };
 		AF694D8F15634E61000C4CC9 /* verify.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = verify.sh; sourceTree = "<group>"; };
-		AF694D9715634E95000C4CC9 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		AF694D9815634E95000C4CC9 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		AF694D9915634E95000C4CC9 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		AFB82E1B1564A43B00ACDD1A /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
+		AFBCF47C1592F0F600CA0BA7 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		AFBCF47D1592F0F600CA0BA7 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		AFBCF47E1592F0F600CA0BA7 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +108,7 @@
 				AF694D5515634E60000C4CC9 /* MobileCoreServices.framework in Frameworks */,
 				AF694D5715634E60000C4CC9 /* CoreMedia.framework in Frameworks */,
 				AF694D6215634E60000C4CC9 /* Cordova.framework in Frameworks */,
-				AF694D9A15634E95000C4CC9 /* libWeChatSDK.a in Frameworks */,
+				AFBCF47F1592F0F600CA0BA7 /* libWeChatSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,7 +163,7 @@
 		AF694D5815634E60000C4CC9 /* weixin */ = {
 			isa = PBXGroup;
 			children = (
-				AF694D9615634E87000C4CC9 /* weixin */,
+				AFBCF47B1592F0F600CA0BA7 /* WeChat SDK 1.1 */,
 				AF694D6115634E60000C4CC9 /* Cordova.framework */,
 				AF694D6315634E60000C4CC9 /* Resources */,
 				AF694D8415634E61000C4CC9 /* Classes */,
@@ -273,14 +273,14 @@
 			name = Plugins;
 			sourceTree = "<group>";
 		};
-		AF694D9615634E87000C4CC9 /* weixin */ = {
+		AFBCF47B1592F0F600CA0BA7 /* WeChat SDK 1.1 */ = {
 			isa = PBXGroup;
 			children = (
-				AF694D9715634E95000C4CC9 /* libWeChatSDK.a */,
-				AF694D9815634E95000C4CC9 /* WXApi.h */,
-				AF694D9915634E95000C4CC9 /* WXApiObject.h */,
+				AFBCF47C1592F0F600CA0BA7 /* libWeChatSDK.a */,
+				AFBCF47D1592F0F600CA0BA7 /* WXApi.h */,
+				AFBCF47E1592F0F600CA0BA7 /* WXApiObject.h */,
 			);
-			name = weixin;
+			path = "WeChat SDK 1.1";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -506,6 +506,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/weixin\"",
+					"\"$(SRCROOT)/weixin/WeChat SDK 1.1\"",
 				);
 				OTHER_LDFLAGS = (
 					"-weak_framework",
@@ -540,6 +541,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/weixin\"",
+					"\"$(SRCROOT)/weixin/WeChat SDK 1.1\"",
 				);
 				OTHER_LDFLAGS = (
 					"-weak_framework",

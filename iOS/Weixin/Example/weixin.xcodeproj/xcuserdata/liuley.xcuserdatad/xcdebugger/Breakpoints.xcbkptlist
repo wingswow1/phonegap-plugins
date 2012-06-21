@@ -151,11 +151,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "weixin/Classes/SinaWeixinPlugin.m"
-         timestampString = "359442871.046053"
+         timestampString = "361952573.677311"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "708"
-         endingLineNumber = "708"
+         startingLineNumber = "730"
+         endingLineNumber = "730"
          landmarkName = "-viewContent:"
          landmarkType = "5">
       </FileBreakpoint>

@@ -33,6 +33,11 @@
     <body onload="onBodyLoad()">
         <div id="info">微信测试demo</div>
         <div id="detail">Loading...</div>
+        <div id="actionType">
+            <p id="sendTypeDescription">设置发送类型：会话(默认)</p>
+            <button class="btnT" onclick="sendTypeA()" >会话</button>
+            <button class="btnT" onclick="sendTypeB()" >朋友圈</button>
+        </div>
         <button class="btn" id="btn1" onclick="sendTextContent()" >发送文本</button>
         <button class="btn" id="btn2" onclick="sendImageContent()" >发送图片</button>
         <button class="btn" id="btn3" onclick="sendMusicContent()" >发送音乐</button>
