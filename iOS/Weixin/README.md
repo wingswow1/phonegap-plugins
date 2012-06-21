@@ -116,7 +116,7 @@ sina.weixin.openWXApp(function(){
                           });
 </code></pre>
 
-###sina.weixin.textContent(onSuccess, onError, types, text)
+###sina.weixin.textContent(onSuccess, onError, types, text, options)
 
 发送/获取 文本信息
 
@@ -129,6 +129,8 @@ sina.weixin.openWXApp(function(){
     * send 表示：发送文本信息请求到微信
     * get 表示：收到微信的请求，发送文本类型应答给微信
   * text 文本信息内容
+  * options 相关参数项，字典类型。包括
+    * scene 发送请求的类型，0表示发送到会话，1表示发送到朋友圈。默认值为0
 
 demo
 <pre><code>
@@ -137,7 +139,9 @@ function getTextContent() {
 }
 
 function sendTextContent() {
-    sina.weixin.textContent(onSuccess,onError,"send","hello world");
+    sina.weixin.textContent(onSuccess,onError,"send","hello world",{
+                            scene:"1"
+                            });
 }
 
 function onSuccess(){
@@ -167,6 +171,7 @@ function onError(response){
   * options 相关参数项，字典类型。包括
     * title 
     * description
+    * scene 发送请求的类型，0表示发送到会话，1表示发送到朋友圈。默认值为0
 
 demo
 <pre><code>
@@ -177,6 +182,7 @@ function sendImageContent(){
         sina.weixin.imageContent(onSuccess,onError,"send",imageURI,{
                                      title:"kris",
                                      description:"picture",
+                                     scene:"1"
                                      });
     },
     onCameraFail:function(msg){
@@ -232,6 +238,7 @@ function onError(response){
     * lowBandUrl 音乐lowband数据的url地址，不支持本地音乐URL。musicUrl和lowBandUrl不能同时为空。
     * thumbUrl 音乐信息缩略图url。当thumbUrl和thumbData同时设置时，采用thumbData。
     * thumbData 音乐信息缩略图base64数据，大小不能超过32K。当thumbUrl和thumbData同时设置时，采用thumbData。
+    * scene 发送请求的类型，0表示发送到会话，1表示发送到朋友圈。默认值为0。
 
 demo
 <pre><code>
@@ -283,6 +290,7 @@ function onError(response){
     * lowBandUrl 视频lowband数据的url地址，不支持本地视频URL。videoUrl和lowBandUrl不能同时为空。
     * thumbUrl 视频信息缩略图url。当thumbUrl和thumbData同时设置时，采用thumbData。
     * thumbData 视频信息缩略图base64数据，大小不能超过32K。当thumbUrl和thumbData同时设置时，采用thumbData。
+    * scene 发送请求的类型，0表示发送到会话，1表示发送到朋友圈。默认值为0
 
 demo
 <pre><code>
@@ -301,7 +309,8 @@ function sendVideoContent(){
                                  {
                                  title:"video",
                                  description:"Happy Video",
-                                 thumbUrl:"http://pluginlist.sinaapp.com/client/images/video.png"
+                                 thumbUrl:"http://pluginlist.sinaapp.com/client/images/video.png",
+                                 scene:"1"
                                  });
 }
 </code></pre>
@@ -324,6 +333,7 @@ function sendVideoContent(){
     * description 网页信息描述内容
     * thumbUrl 网页信息缩略图url。当thumbUrl和thumbData同时设置时，采用thumbData。
     * thumbData 网页信息缩略图base64数据，大小不能超过32K。当thumbUrl和thumbData同时设置时，采用thumbData。
+    * scene 发送请求的类型，0表示发送到会话，1表示发送到朋友圈。默认值为0
 
 demo
 <pre><code>
@@ -333,7 +343,8 @@ function sendWebpageContent(){
                                    {
                                    title:"新浪移动云平台介绍",
                                    description:"新浪移动云是在SAE基础上的子平台，专注于为移动设备同时提供云+端的能力。\n为方便开发者使用，移动云直接集成在SAE在线管理平台中。",
-                                   thumbUrl:"http://pluginlist.sinaapp.com/client/images/icon.png"
+                                   thumbUrl:"http://pluginlist.sinaapp.com/client/images/icon.png",
+                                   scene:"1"
                                    });
 }
 function getWebpageContent(){
@@ -367,6 +378,7 @@ function getWebpageContent(){
     * extInfo 自定义简单数据，长度不能超过2K。微信应用会回传给第三方应用处理。extInfo与fileData不能同时为空。
     * fileData APP文件数据，JSON对象，大小不能超过10M。该数据发送给微信好友，微信好友需要点击后下载数据，微信应用会回传给第三方应用处理。extInfo与fileData不能同时为空。
     * url 若第三方应用不存在，微信应用会打开该url所指的App下载地址。
+    * scene 发送请求的类型，0表示发送到会话，1表示发送到朋友圈。默认值为0
 
 demo
 <pre><code>
@@ -397,7 +409,8 @@ function sendAPPContent(){
                                                    {title:"App消息名称",
                                                    description:"内容描述",
                                                    thumbUrl:"缩略图链接地址"}
-                                                   )
+                                                   ),
+                           scene:"1"
                            });
 }
 </code></pre>

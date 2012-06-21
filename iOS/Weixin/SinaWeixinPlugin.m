@@ -64,6 +64,9 @@
  * 参数:
  * type:send/get
  * text
+ 
+ * Dict:
+ * scene: int. WXSceneSession = 0, WXSceneTimeline = 1
  */
 -(void)textContent:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
 {
@@ -78,11 +81,15 @@
     NSString *type=[arguments objectAtIndex:1];
     NSString *text=[arguments objectAtIndex:2];
     
+    NSInteger scene=[[options objectForKey:@"scene"] integerValue];
+    
     if([type isEqualToString:@"send"])
     {
         SendMessageToWXReq *req=[[[SendMessageToWXReq alloc] init] autorelease];
         req.bText=YES;
         req.text=text;
+        req.scene=scene;
+        
         [WXApi sendReq:req];
     }else if([type isEqualToString:@"get"])
     {
@@ -109,6 +116,7 @@
  * Dict:
  * title
  * description
+ * scene: int. WXSceneSession = 0, WXSceneTimeline = 1,
  */
 -(void)imageContent:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
 {
@@ -122,6 +130,7 @@
     
     NSString *title=[options objectForKey:@"title"];
     NSString *description=[options objectForKey:@"description"];
+    NSInteger scene=[[options objectForKey:@"scene"] integerValue];
     
     NSString *type=[arguments objectAtIndex:1];
     
@@ -173,6 +182,7 @@
         SendMessageToWXReq *req=[[[SendMessageToWXReq alloc] init] autorelease];
         req.bText=NO;
         req.message=message;
+        req.scene=scene;
         
         [WXApi sendReq:req];
     }else if([type isEqualToString:@"get"])
@@ -205,6 +215,7 @@
  * lowBandUrl
  * thumbUrl
  * thumbData
+ * scene: int. WXSceneSession = 0, WXSceneTimeline = 1
  */
 -(void)musicContent:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
 {
@@ -221,6 +232,7 @@
     NSString *musicLowBandUrl=[options objectForKey:@"lowBandUrl"];
     NSString *thumbImageUrl=[options objectForKey:@"thumbUrl"];
     NSString *thumbData=[options objectForKey:@"thumbData"];
+    NSInteger scene=[[options objectForKey:@"scene"] integerValue];
     
     if(arguments.count<3 && !musicLowBandUrl)
     {
@@ -265,6 +277,7 @@
         SendMessageToWXReq *req=[[[SendMessageToWXReq alloc] init] autorelease];
         req.bText=NO;
         req.message=message;
+        req.scene=scene;
         
         [WXApi sendReq:req];
     }else if([type isEqualToString:@"get"])
@@ -297,6 +310,7 @@
  * lowBandUrl
  * thumbUrl
  * thumbData
+ * scene: int. WXSceneSession = 0, WXSceneTimeline = 1
  */
 -(void)videoContent:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
 {
@@ -313,6 +327,7 @@
     NSString *videoLowBandUrl=[options objectForKey:@"lowBandUrl"];
     NSString *thumbImageUrl=[options objectForKey:@"thumbUrl"];
     NSString *thumbData=[options objectForKey:@"thumbData"];
+    NSInteger scene=[[options objectForKey:@"scene"] integerValue];
     
     if(arguments.count<3 && !videoLowBandUrl)
     {
@@ -356,6 +371,7 @@
         SendMessageToWXReq *req=[[[SendMessageToWXReq alloc] init] autorelease];
         req.bText=NO;
         req.message=message;
+        req.scene=scene;
         
         [WXApi sendReq:req];
     }else if([type isEqualToString:@"get"])
@@ -387,6 +403,7 @@
  * description
  * thumbUrl
  * thumbData
+ * scene: int. WXSceneSession = 0, WXSceneTimeline = 1
  */
 -(void)webpageContent:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
 {
@@ -405,6 +422,7 @@
     NSString *description=[options objectForKey:@"description"];
     NSString *thumbImageUrl=[options objectForKey:@"thumbUrl"];
     NSString *thumbData=[options objectForKey:@"thumbData"];
+    NSInteger scene=[[options objectForKey:@"scene"] integerValue];
     
     UIImage *thumbImage=nil;
     if(thumbImageUrl)
@@ -436,6 +454,7 @@
         SendMessageToWXReq *req=[[[SendMessageToWXReq alloc] init] autorelease];
         req.bText=NO;
         req.message=message;
+        req.scene=scene;
         
         [WXApi sendReq:req];
     }
@@ -470,6 +489,7 @@
  * extInfo
  * fileData: jsonString
  * url
+ * scene: int. WXSceneSession = 0, WXSceneTimeline = 1
  */
 -(void)APPContent:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
 {
@@ -491,6 +511,7 @@
     NSString *fileString=[options objectForKey:@"fileData"];
     NSData *fileData=[fileString dataUsingEncoding:NSUTF8StringEncoding];
     NSString *url=[options objectForKey:@"url"];
+    NSInteger scene=[[options objectForKey:@"scene"] integerValue];
     
     if(!extInfo && !fileData)
     {
@@ -530,6 +551,7 @@
         SendMessageToWXReq *req=[[[SendMessageToWXReq alloc] init] autorelease];
         req.bText=NO;
         req.message=message;
+        req.scene=scene;
         
         [WXApi sendReq:req];
     }

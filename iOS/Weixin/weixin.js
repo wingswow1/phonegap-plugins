@@ -12,8 +12,8 @@ Weixin.prototype = {
     setResponser :function(name){
         cordova.exec(null, null, 'Weixin', 'setResponser', [name]);
     },
-    textContent : function(onSuccess, onError, types, text) {
-        cordova.exec(onSuccess, onError, 'Weixin', 'textContent', [types,text]);     
+    textContent : function(onSuccess, onError, types, text, options) {
+        cordova.exec(onSuccess, onError, 'Weixin', 'textContent', [types,text,options]);     
     },
     imageContent : function(onSuccess, onError, types, imageUrl, options) {
         cordova.exec(onSuccess, onError, 'Weixin', 'imageContent', [types,imageUrl,options]);
