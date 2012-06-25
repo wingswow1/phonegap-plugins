@@ -18,6 +18,8 @@ sina.weixin.webpageContent(onSuccess, onError, types, webpageUrl, options)
 
 sina.weixin.APPContent(onSuccess, onError, types, options)
 
+详见下面使用说明……
+
 ##Adding the Plugin to your project
 
 1.add weixin.js to your www folder and include it to your html file below cordova.js
