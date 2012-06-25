@@ -2,14 +2,20 @@
 
 微信插件
 
-##1.1更新
+##1.1 更新提示
+
 在以下API中的参数options中添加了scene项：发送请求的类型，0表示发送到会话，1表示发送到朋友圈。默认值为0
 
 sina.weixin.textContent(onSuccess, onError, types, text, options)
+
 sina.weixin.imageContent(onSuccess, onError, types, imageUrl, options)
+
 sina.weixin.musicContent(onSuccess, onError, types, musicUrl, options)
+
 sina.weixin.videoContent(onSuccess, onError, types, videoUrl, options)
+
 sina.weixin.webpageContent(onSuccess, onError, types, webpageUrl, options)
+
 sina.weixin.APPContent(onSuccess, onError, types, options)
 
 ##Adding the Plugin to your project
