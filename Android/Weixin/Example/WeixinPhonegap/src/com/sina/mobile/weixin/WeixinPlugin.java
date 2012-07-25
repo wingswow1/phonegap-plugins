@@ -53,7 +53,7 @@ public class WeixinPlugin extends Plugin {
 	public void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
 
-		DroidGap gap = ((DroidGap) (this.ctx));
+		DroidGap gap = ((DroidGap) (this.cordova));
 
 		gap.setIntent(intent);
 	}
@@ -62,7 +62,7 @@ public class WeixinPlugin extends Plugin {
 	public void setContext(CordovaInterface ctx) {
 		super.setContext(ctx);
 
-		DroidGap gap = ((DroidGap) (this.ctx));
+		DroidGap gap = ((DroidGap) (this.cordova.getActivity()));
 		((CordovaExample) gap)
 				.setOnPageFinishedListener(new OnPageFinishedListener() {
 					@Override
@@ -82,7 +82,7 @@ public class WeixinPlugin extends Plugin {
 	}
 
 	private void handleReq() {
-		final DroidGap gap = ((DroidGap) (this.ctx));
+		final DroidGap gap = ((DroidGap) (this.cordova.getActivity()));
 		try {
 			Intent i = gap.getIntent();
 			Log.d(TAG, "intent: " + i);
@@ -99,6 +99,9 @@ public class WeixinPlugin extends Plugin {
 			Log.d(TAG, "bundle: " + bundle);
 
 			String type = bundle.getString("type");
+			if (type == null) {
+				return;
+			}
 			Log.d(TAG, "type: " + type);
 			if (type.equals("onReq")) {
 				int reqType = bundle.getInt("reqType");
@@ -159,8 +162,8 @@ public class WeixinPlugin extends Plugin {
 		try {
 			String type = args.getString(0);
 			String text = args.getString(1);
-			api = WXAPIFactory
-					.createWXAPI((Context) this.ctx, Constants.APP_ID);
+			api = WXAPIFactory.createWXAPI(
+					(Context) this.cordova.getActivity(), Constants.APP_ID);
 
 			// 初始化一个WXTextObject对象
 			WXTextObject textObj = new WXTextObject();
@@ -214,7 +217,8 @@ public class WeixinPlugin extends Plugin {
 				}
 			} else if (thumbUrl.startsWith("content")) {
 				Uri imgUri = Uri.parse(thumbUrl);
-				ContentResolver cr = ctx.getContentResolver();
+				ContentResolver cr = this.cordova.getActivity()
+						.getContentResolver();
 				try {
 					Bitmap bmp = BitmapFactory.decodeFileDescriptor(cr
 							.openAssetFileDescriptor(imgUri, "r")
@@ -248,7 +252,7 @@ public class WeixinPlugin extends Plugin {
 
 			api.sendResp(resp);
 
-			DroidGap gap = ((DroidGap) (this.ctx));
+			DroidGap gap = ((DroidGap) (this.cordova.getActivity()));
 			gap.moveTaskToBack(true);
 		}
 	}
@@ -277,13 +281,15 @@ public class WeixinPlugin extends Plugin {
 				}
 			} else if (imageUrl.startsWith("content")) {
 				Uri imgUri = Uri.parse(imageUrl);
-				ContentResolver cr = ctx.getContentResolver();
+				ContentResolver cr = this.cordova.getActivity()
+						.getContentResolver();
 				imgObj.imageData = Util.inputStreamToByte(cr
 						.openInputStream(imgUri));
 
-				bmp = BitmapFactory.decodeFileDescriptor(cr
-						.openAssetFileDescriptor(imgUri, "r")
-						.getFileDescriptor());
+				// bmp = BitmapFactory.decodeFileDescriptor(cr
+				// .openAssetFileDescriptor(imgUri, "r")
+				// .getFileDescriptor());
+				bmp = BitmapFactory.decodeStream(cr.openInputStream(imgUri));
 			} else {
 				String path = imageUrl;
 				File file = new File(path);
@@ -455,7 +461,8 @@ public class WeixinPlugin extends Plugin {
 		pr.setKeepCallback(true);
 		this.callbackId = callbackId;
 
-		bundle = ((DroidGap) (this.ctx)).getIntent().getExtras();
+		bundle = ((DroidGap) (this.cordova.getActivity())).getIntent()
+				.getExtras();
 
 		if (action.equals("registerApp")) {
 			String appId = args.optString(0);
@@ -464,7 +471,8 @@ public class WeixinPlugin extends Plugin {
 				return pr;
 			}
 
-			api = WXAPIFactory.createWXAPI((Context) this.ctx, null);
+			api = WXAPIFactory.createWXAPI(
+					(Context) this.cordova.getActivity(), null);
 			if (api.registerApp(appId)) {
 				WeixinPlugin.this.success("注册成功", callbackId);
 				return pr;

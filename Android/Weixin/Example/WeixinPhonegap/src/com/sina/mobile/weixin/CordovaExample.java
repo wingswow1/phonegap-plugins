@@ -1,13 +1,12 @@
 package com.sina.mobile.weixin;
 
 import org.apache.cordova.CordovaChromeClient;
+import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CordovaWebViewClient;
 import org.apache.cordova.DroidGap;
 
 import android.os.Bundle;
 import android.webkit.WebView;
-
-import com.tencent.mm.sdk.platformtools.Log;
 
 public class CordovaExample extends DroidGap {
 
@@ -25,7 +24,7 @@ public class CordovaExample extends DroidGap {
 	}
 
 	public void init() {
-		this.init(new WebView(this), new CordovaWebViewClient(this) {
+		this.init(new CordovaWebView(this), new CordovaWebViewClient(this) {
 			@Override
 			public void onPageFinished(WebView view, String url) {
 				super.onPageFinished(view, url);
