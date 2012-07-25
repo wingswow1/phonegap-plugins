@@ -47,6 +47,7 @@ Weixin.prototype = {
     }
 }
 
-cordova.addConstructor(function() {
-    cordova.addPlugin('weixin', new Weixin());
-});
+if(typeof window.plugins == "undefined") {
+    window.plugins = {};
+}
+window.plugins.weixin = new Weixin();
