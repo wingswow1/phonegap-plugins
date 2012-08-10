@@ -94,7 +94,7 @@ function(){
 
 GET访问微博接口，发起GET请求，访问相应微博接口。
 
-url 为http://open.weibo.com/wiki/API%E6%96%87%E6%A1%A3_V2微博api文档的完整url，可以点击相应接口到相应页面，查看URL获得。
+url 为http://open.weibo.com/wiki/API%E6%96%87%E6%A1%A3_V2 微博api文档的完整url，可以点击相应接口到相应页面，查看URL获得。
 params 为GET请求参数，如{access_token:“”,}
 请求成功后会回调success
 
@@ -110,7 +110,7 @@ function(response){
 response是返回结果，为字符串
 例子
 
-    $.get("https://api.weibo.com/2/account/get_uid.json",{
+    $.get("https://api.weibo.com/2/account/get_uid.json" ,{
       access_token:access_t
     },function(data){
       alert('Useruidis'+data.uid);
@@ -120,7 +120,7 @@ response是返回结果，为字符串
 
 POST访问微博接口，发起POST请求，访问相应微博接口。
 
-url 为http://open.weibo.com/wiki/API%E6%96%87%E6%A1%A3_V2微博api文档的完整url，可以点击相应接口到相应页面，查看URL获得。
+url 为http://open.weibo.com/wiki/API%E6%96%87%E6%A1%A3_V2 微博api文档的完整url，可以点击相应接口到相应页面，查看URL获得。
 params 为POST请求参数，如{access_token:“”,}
 请求成功后会回调success
 
@@ -137,13 +137,13 @@ response 是返回结果，为字符串
 
 ## sina.weibo.upload(url,params,file,success,[fail]) ##
 
-上传图片接口，与sina.weibo.post(url,params,success,[fail])相似，增加file参数，主要用于访问https://api.weibo.com/2/statuses/upload.json该接口。
+上传图片接口，与sina.weibo.post(url,params,success,[fail])相似，增加file参数，主要用于访问 https://api.weibo.com/2/statuses/upload.json 该接口。
 
 例子
 
 functiononSuccess(imageURI){
   alert("imageURI:"+imageURI);
-  sina.weibo.upload("https://api.weibo.com/2/statuses/upload.json",{
+  sina.weibo.upload("https://api.weibo.com/2/statuses/upload.json" ,{
     access_token:access_t,
     status:"testupdate"
   },
