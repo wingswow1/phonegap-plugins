@@ -18,7 +18,7 @@ sina.weibo
 
 ## sina.weibo.init(params,success,fail) ##
 
-初始化接口，初始化微博插件，设定相应参数。Params为微博开放平台相关参数，{appKey:“”,appSecret:“”,redirectUrl:“”}，其中appKey和appSecret为微博开放平台申请获得，申请时选择移动应用，新浪移动云为保障安全性采取了加密的方式，需要在相应地址http://cwdencrypt.sinaapp.com/(废弃，现在sae后台有相应设置)，将appKey和appSecret加密，然后将的到的结果填入此处。redirectUrl为应用回调地址，需要与微博开放平台那里填写的地址一致。
+初始化接口，初始化微博插件，设定相应参数。Params为微博开放平台相关参数，{appKey:“”,appSecret:“”,redirectUrl:“”}，其中appKey和appSecret为微博开放平台申请获得，申请时选择移动应用。redirectUrl为应用回调地址，需要与微博开放平台那里填写的地址一致。
 
 success和fail分别是成功和失败的回调函数，并提供了相应的信息。
 
