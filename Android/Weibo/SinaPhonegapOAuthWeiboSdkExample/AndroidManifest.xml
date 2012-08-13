@@ -37,7 +37,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.qhm123.phonegapoauth.weibosdkexample.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
