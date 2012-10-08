@@ -2,6 +2,11 @@
 
 微信插件
 
+##2012.10.08 更新提示 update note
+1. 更新微信SDK，以支持armv7s/iOS6
+2. 更新weixin.js，以支持phonegap2.0及以上
+3. 添加phonegap2.1.0版本的示例工程项目：Example_for_2.1.0. （注：将工程项目中的CordovaLib.xcodeproj定位到本地已安装好的CordovaLib目录下。）
+
 ##1.1 更新提示
 
 在以下API中的参数options中添加了scene项：发送请求的类型，0表示发送到会话，1表示发送到朋友圈。默认值为0
