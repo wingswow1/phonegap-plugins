@@ -16,6 +16,7 @@ enum  WXErrCode {
     WXErrCodeUserCancel = -2,
     WXErrCodeSentFail   = -3,
     WXErrCodeAuthDeny   = -4,
+    WXErrCodeUnsupport  = -5,
 };
 
 enum WXScene {
@@ -72,7 +73,9 @@ enum WXAPISupport {
 /** 发送消息的类型，包括文本消息和多媒体消息两种，两者只能选择其一，不能同时发送文本和多媒体消息 */
 @property (nonatomic, assign) BOOL bText;
 
-/** 发送的目标场景， 可以选择发送到朋友或者朋友圈。 默认发送到会话。*/
+/** 发送的目标场景， 可以选择发送到会话(WXSceneSession)或者朋友圈(WXSceneTimeline)。 默认发送到会话。
+ * @see WXScene
+ */
 @property (nonatomic, assign) int scene;
 
 @end
@@ -325,25 +328,27 @@ enum WXAPISupport {
 
 @end
 
-#pragma mark -
-
-
-/*
- * 微信启动App附带的启动数据
+/*! @brief 多媒体消息中包含的表情数据对象
+ *
+ * 微信终端和第三方程序之间传递消息中包含的表情数据对象。
+ * @see WXMediaMessage
+ * @note 表情类消息暂不支持发送到朋友圈
  */
-//@interface WXAppLaunchData : NSObject
+@interface WXEmoticonObject : NSObject
 
-/*
- * 微信启动App的类型， 参照WXAppLaunchType
+/*! @brief 返回一个WXEmoticonObject对象
+ *
+ * @note 返回的WXEmoticonObject对象是自动释放的
+ * @note 发送表情，thumbData字段必须填，否则无法跳转到微信程序，表情类消息暂不支持发送到朋友圈
  */
-//@property (nonatomic, assign) WXAppLaunchType launchType;
++(WXEmoticonObject *) object;
 
-/*
- * 微信启动App附带的消息内容
+/** 表情真实数据内容 
+ * @note 大小不能超过10M
  */
-//@property (nonatomic, retain) WXMediaMessage *message;
+@property (nonatomic, retain) NSData    *emoticonData;
 
+@end
 
-//@end
 
 
