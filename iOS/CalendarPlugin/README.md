@@ -91,7 +91,7 @@
                                 '2014-04-10 12:23']); // 筛选的结束时间
 </code></pre>
 
-[005]:###sina.Calendar.RecurType### "RecurType"
+[005]:#sinacalendarrecurtype "RecurType"
 ###sina.Calendar.RecurType###
 用来定义日历项的**重复规则**，枚举类型
 
