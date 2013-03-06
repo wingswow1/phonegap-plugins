@@ -31,7 +31,7 @@
 
 * onSuccess 创建成功时的回调方法，返回值为String类型
 * onError 创建失败时的回调方法，返回值为String类型
-* options 自定义日历项参数设置，为Array数组类型**[title,startDate,endDate,location,message,url,alarmRule,repeatRule]**
+* options 自定义日历项参数设置，为Array数组类型 **[title,startDate,endDate,location,message,url,alarmRule,repeatRule]** 
 	* title 日历项的标题：字符串类型
 	* startDate 日历项的开始时间：String字符串类型（格式：yyyy-MM-dd HH:mm）
 	* endDate 日历项的结束时间：String字符串类型（格式：yyyy-MM-dd HH:mm）
@@ -61,7 +61,7 @@
 ###sina.Calendar.getEventList(onSuccess,onError,options)###
 获取符合规则的日历项列表
 
-* onSuccess 获取成功时的回调方法，返回值为**Array数组类型**，其中数组每一项均为**CalendarEvent**字典对象
+* onSuccess 获取成功时的回调方法，返回值为 **Array数组类型** ，其中数组每一项均为 **CalendarEvent** 字典对象
 	* CalendarEvent 内包括如下项
 		- title 日历项的标题：String字符串类型
 		- location 日历项的位置描述：String字符串类型
@@ -71,12 +71,12 @@
 		- isRepeat 是否重复事件：bool布尔值类型
 		- isAllDay 是否全天事件：bool布尔值类型
 * onError 操作失败时的回调方法，返回值为String类型
-* options 所要获取的日历项列表条件：Array数组类型**[startDate,endDate]**
+* options 所要获取的日历项列表条件：Array数组类型 **[startDate,endDate]** 
 	* startDate 筛选的开始时间：String字符串类型（格式：yyyy-MM-dd HH:mm）
 	* endDate 筛选的结束时间：String字符串类型（格式：yyyy-MM-dd HH:mm）
 	
 例如：
-<pre><code>sina.Calendar.getEventList(function(response){ // 完成时的回调方法
+<pre><javascript>sina.Calendar.getEventList(function(response){ // 完成时的回调方法
                                console.log("success: "+response.length);
                                console.log("title:"+response[0].title);
                                console.log("location:"+response[0].location);
@@ -89,11 +89,11 @@
                                },
                                ['2012-04-10 12:23', // 筛选的开始时间
                                 '2014-04-10 12:23']); // 筛选的结束时间
-</code></pre>
+</javascript></pre>
 
 [005]:#sinacalendarrecurtype "RecurType"
 ###sina.Calendar.RecurType###
-用来定义日历项的**重复规则**，枚举类型
+用来定义日历项的 **重复规则** ，枚举类型
 
 * none 不重复：0
 * daily 每日重复：1
@@ -102,6 +102,6 @@
 * yearly 每年重复：4
 
 例如：
-<pre><code>sina.Calendar.RecurType['daily'] // 每日重复
+<pre><javascript>sina.Calendar.RecurType['daily'] // 每日重复
 sina.Calendar.RecurType['none'] // 不重复
-</code></pre>
+</javascript></pre>
